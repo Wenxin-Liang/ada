@@ -1,0 +1,116 @@
+library(MASS)
+summary(survey)
+Sex<-survey$Sex
+Smoke<-survey$Smoke
+data<-data.frame(Sex,Smoke)
+summary(data)
+fdata<-data[data$Sex=="Female",]
+mdata<-data[data$Sex=="Male",]
+summary(fdata,na.rm=TRUE)
+summary(mdata,na.rm=TRUE)
+relation.data<-matrix(c(5,99,9,5,6,89,10,12),4,2,byrow=F)
+chisq.test(relation.data)
+#Problem 2
+high<-subset(survey,Pulse>80,select=c(Pulse,Smoke,Sex,Exer))
+low<-subset(survey,Pulse<65,select=c(Pulse,Smoke,Sex,Exer))
+medium<-subset(survey,(Pulse>64)&(Pulse<81),select=c(Pulse,Smoke,Sex,Exer))
+a=list();
+a[[1]]<-subset(high,(Sex=="Male") & (Exer=="Freq") & (Pulse != "NA")& (Smoke != "NA"),select=c(Pulse,Smoke))
+summary(a[[1]])
+a[[2]]<-subset(medium,(Sex=="Male") & (Exer=="Freq") & (Pulse != "NA")& (Smoke != "NA"),select=c(Pulse,Smoke))
+summary(a[[2]])
+a[[3]]<-subset(low,(Sex=="Male") & (Exer=="Freq") & (Pulse != "NA")& (Smoke != "NA"),select=c(Pulse,Smoke))
+summary(a[[3]])
+mf<-matrix(c(1,4,0,2,1,22,5,4,0,13,0,1),nrow=3,ncol=4,byrow=T,dimnames=list(c("high","medium","low"),c("heavy","never","occas","regular")))
+
+fisher.test(mf)
+
+a[[4]]<-subset(high,(Sex=="Female") & (Exer=="Freq") & (Pulse != "NA")& (Smoke != "NA"),select=c(Pulse,Smoke))
+summary(a[[4]])
+a[[5]]<-subset(medium,(Sex=="Female") & (Exer=="Freq") & (Pulse != "NA")& (Smoke != "NA"),select=c(Pulse,Smoke))
+summary(a[[5]])
+a[[6]]<-subset(low,(Sex=="Female") & (Exer=="Freq") & (Pulse != "NA")& (Smoke != "NA"),select=c(Pulse,Smoke))
+summary(a[[6]])
+ff<-matrix(c(0,8,2,0,2,18,1,1,0,8,1,0),nrow=3,ncol=4,byrow=T,dimnames=list(c("high","medium","low"),c("heavy","never","occas","regular")))
+fisher.test(ff)
+
+
+a[[7]]<-subset(high,(Sex=="Male") & (Exer=="None") & (Pulse != "NA")& (Smoke != "NA"),select=c(Pulse,Smoke))
+summary(a[[7]])
+a[[8]]<-subset(medium,(Sex=="Male") & (Exer=="None") & (Pulse != "NA")& (Smoke != "NA"),select=c(Pulse,Smoke))
+summary(a[[8]])
+a[[9]]<-subset(low,(Sex=="Male") & (Exer=="None") & (Pulse != "NA")& (Smoke != "NA"),select=c(Pulse,Smoke))
+summary(a[[9]])
+mn<-matrix(c(0,2,1,1,0,3,1,0,0,1,0,0),nrow=3,ncol=4,byrow=T,dimnames=list(c("high","medium","low"),c("heavy","never","occas","regular")))
+fisher.test(mn)
+
+a[[10]]<-subset(high,(Sex=="Female") & (Exer=="None") & (Pulse != "NA")& (Smoke != "NA"),select=c(Pulse,Smoke))
+summary(a[[10]])
+a[[11]]<-subset(medium,(Sex=="Female") & (Exer=="None") & (Pulse != "NA")& (Smoke != "NA"),select=c(Pulse,Smoke))
+summary(a[[11]])
+a[[12]]<-subset(low,(Sex=="Female") & (Exer=="None") & (Pulse != "NA")& (Smoke != "NA"),select=c(Pulse,Smoke))
+summary(a[[12]])
+fn<-matrix(c(0,1,0,0,0,4,1,0,0,1,0,0),nrow=3,ncol=4,byrow=T,dimnames=list(c("high","medium","low"),c("heavy","never","occas","regular")))
+fisher.test(fn)
+
+a[[13]]<-subset(high,(Sex=="Male") & (Exer=="Some") & (Pulse != "NA")& (Smoke != "NA"),select=c(Pulse,Smoke))
+summary(a[[13]])
+a[[14]]<-subset(medium,(Sex=="Male") & (Exer=="Some") & (Pulse != "NA")& (Smoke != "NA"),select=c(Pulse,Smoke))
+summary(a[[14]])
+a[[15]]<-subset(low,(Sex=="Male") & (Exer=="Some") & (Pulse != "NA")& (Smoke != "NA"),select=c(Pulse,Smoke))
+summary(a[[15]])
+ms<-matrix(c(1,9,0,1,0,12,1,2,0,6,0,1),nrow=3,ncol=4,byrow=T,dimnames=list(c("high","medium","low"),c("heavy","never","occas","regular")))
+fisher.test(ms)
+
+a[[16]]<-subset(high,(Sex=="Female") & (Exer=="Some") & (Pulse != "NA")& (Smoke != "NA"),select=c(Pulse,Smoke))
+summary(a[[16]])
+a[[17]]<-subset(medium,(Sex=="Female") & (Exer=="Some") & (Pulse != "NA")& (Smoke != "NA"),select=c(Pulse,Smoke))
+summary(a[[17]])
+a[[18]]<-subset(low,(Sex=="Female") & (Exer=="Some") & (Pulse != "NA")& (Smoke != "NA"),select=c(Pulse,Smoke))
+summary(a[[18]])
+fs<-matrix(c(0,13,0,1,2,24,1,1,0,2,2,1),nrow=3,ncol=4,byrow=T,dimnames=list(c("high","medium","low"),c("heavy","never","occas","regular")))
+fisher.test(fs)
+
+c=list();
+c[[1]]<-subset(high,(Sex=="Female")& (Pulse != "NA")& (Smoke != "NA"),select=c(Pulse,Smoke))
+summary(c[[1]])
+c[[2]]<-subset(medium,(Sex=="Female")& (Pulse != "NA")& (Smoke != "NA"),select=c(Pulse,Smoke))
+summary(c[[2]])
+c[[3]]<-subset(low,(Sex=="Female")& (Pulse != "NA")& (Smoke != "NA"),select=c(Pulse,Smoke))
+summary(c[[3]])
+female<-matrix(c(0,22,2,1,4,46,3,2,0,11,3,1),nrow=3,ncol=4,byrow=T,dimnames=list(c("high","medium","low"),c("heavy","never","occas","regular")))
+fisher.test(female)
+
+d=list();
+d[[1]]<-subset(high,(Sex=="Male")& (Pulse != "NA")& (Smoke != "NA"),select=c(Pulse,Smoke))
+summary(d[[1]])
+d[[2]]<-subset(medium,(Sex=="Male")& (Pulse != "NA")& (Smoke != "NA"),select=c(Pulse,Smoke))
+summary(d[[2]])
+d[[3]]<-subset(low,(Sex=="Male")& (Pulse != "NA")& (Smoke != "NA"),select=c(Pulse,Smoke))
+summary(d[[3]])
+male<-matrix(c(2,15,1,4,1,37,7,6,0,20,0,2),nrow=3,ncol=4,byrow=T,dimnames=list(c("high","medium","low"),c("heavy","never","occas","regular")))
+fisher.test(male)
+
+
+e=list();
+e[[1]]<-subset(high,(Pulse != "NA")& (Smoke != "NA"),select=c(Pulse,Smoke))
+summary(e[[1]])
+e[[2]]<-subset(medium, (Pulse != "NA")& (Smoke != "NA"),select=c(Pulse,Smoke))
+summary(e[[2]])
+e[[3]]<-subset(low,(Pulse != "NA")& (Smoke != "NA"),select=c(Pulse,Smoke))
+summary(e[[3]])
+all<-matrix(c(2,37,3,5,5,84,10,8,0,31,3,3),nrow=3,ncol=4,byrow=T,dimnames=list(c("high","medium","low"),c("heavy","never","occas","regular")))
+fisher.test(all)
+
+#Problem 3
+hdata<-subset(survey,(Pulse>79) & (Exer=="None") & (Smoke !="NA"),select=c(Pulse,Smoke))
+ldata<-subset(survey,(Pulse<80) & (Exer=="None") & (Smoke !="NA"),select=c(Pulse,Smoke))
+hn<-subset(hdata,Smoke=="Never",select=c(Pulse,Smoke))
+ln<-subset(ldata,Smoke=="Never",select=c(Pulse,Smoke))
+nrow(hn)
+nrow(hdata)
+nrow(ln)
+nrow(ldata)
+hlne.data<-matrix(c(5,2,7,2),2,2,byrow=F)
+chisq.test(hlne.data)
+fisher.test(hlne.data)
